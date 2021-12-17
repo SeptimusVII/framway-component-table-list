@@ -38,8 +38,9 @@
       }
     }
   }
-  &[data-name*="tags"]{vertical-align: middle;}
+  &[data-name*="tags"], 
   .valign--middle &, 
+  &.valign--middle {vertical-align: middle;}
 
   .table-list__sort{display: inline-block; width: 30px; line-height: 1.2em; cursor: pointer; font-size: 1.35em; text-align: right; margin-left: 1em; opacity: 0.4; transition: opacity 0.4s;
     &:hover,&.active{opacity: 1;}
