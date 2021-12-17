@@ -64,3 +64,9 @@
     }
   }
 }
+
+.table-list__container{
+  thead tr{@extend .table-list__headline;}
+  tbody tr:not(.table-list__headline){@extend .table-list__line;}
+  td,th{@extend .table-list__cell;}
+}
