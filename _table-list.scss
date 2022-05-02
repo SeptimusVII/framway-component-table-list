@@ -5,17 +5,17 @@
 
   %input{min-width: 150px;}
 }
-.table-list__container{width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0 0.5rem;
+.table-list__container{width: 100%; display: table; table-layout: auto; border-collapse: separate; border-spacing: 0 0.5rem;
   &.loading{
     .table-list__line{@extend .loading;}
   }
 
   &.keepOne .table-list__headline+.table-list__line:last-child .table-list__cell[data-name="actions"] *[data-action="delete"]{display: none;pointer-events: none;}
 }
-.table-list__headline{transform: translateY(0.5rem);
+.table-list__headline{transform: translateY(0.5rem); display: table-row;
 	.table-list__cell{white-space: nowrap; max-width: none;}
 }
-.table-list__line{@extend %paper; 
+.table-list__line{@extend %paper;  display: table-row;
   &:not([class*="bg-"]){background-color: body(block-background);}
   &.loading{ pointer-events: none;
     &>*{opacity: 0.3;}
