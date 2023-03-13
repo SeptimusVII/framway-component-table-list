@@ -1,27 +1,45 @@
 // LIST SYSTEM
-.table-list{display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; 
-	&.fix--shadow{width: auto; padding-left: 3px; padding-right: 3px;margin-right: -3px; margin-left: -3px;}
-	.filters+&{margin-top: 1rem;}
-
+.table-list{ display: block; width: 100%; 
+  &.fix--shadow,
+  &.scroll-x{ overflow-x: auto; -webkit-overflow-scrolling: touch;width: auto; padding-left: 3px; padding-right: 3px;margin-right: -3px; margin-left: -3px;}
+	.filters+&{margin-top: 1em;}
   %input{min-width: 150px;}
+
+  &.mode--block{
+    thead, .table-list__headline{display: none;}
+    tbody, .table-list__container{display: flex; flex-wrap: wrap; gap: 1em; width: 100%;}
+    .table-list__line{display: flex;flex-direction: column; flex-grow: 1; flex-shrink: 0; flex-basis: 30%; max-width: 100%; min-width: 300px; gap: 1em; padding: 1.35em 1.5em;
+      &:empty,
+      &.filler{background: none; height: 0; border: 0; padding: 0; margin: 0; pointer-events: none;}
+      @include media-max(xs){min-width: 250px;} 
+    }
+    .table-list__cell{max-width: none; width: 100%; padding: 0;
+      &:empty{display: none;}
+      &[data-name="actions"]{margin-top: auto; text-align: right;
+        i[class*=fa],svg{font-size: 1.5em;}
+      }
+    }
+    .table-list__cell[data-label]:before{content: attr(data-label); display: block; font-size: 0.8em; opacity: 0.45;}
+  }
 }
-.table-list__container{width: 100%; display: table; table-layout: auto; border-collapse: separate; border-spacing: 0 0.5rem;
+.table-list__container{width: 100%; display: table; table-layout: auto; border-collapse: separate; border-spacing: 0 0.5em;
   &.loading{
     .table-list__line{@extend .loading;}
   }
 
   &.keepOne .table-list__headline+.table-list__line:last-child .table-list__cell[data-name="actions"] *[data-action="delete"]{display: none;pointer-events: none;}
 }
-.table-list__headline{transform: translateY(0.5rem); display: table-row;
+.table-list__headline{transform: translateY(0.5em); display: table-row;
 	.table-list__cell{white-space: nowrap; max-width: none;}
 }
 .table-list__line{@extend %paper;  display: table-row;
+  &.filler{display: none;}
   &:not([class*="bg-"]){background-color: body(block-background);}
   &.loading{ pointer-events: none;
     &>*{opacity: 0.3;}
   }
   &.separator{background-color: transparent; box-shadow: none; color: rgba(contrastFW($primary,body(background)),0.2);
-    & .table-list__cell{padding: 1rem 0.5rem 0; cursor: pointer;}
+    & .table-list__cell{padding: 1em 0.5em 0; cursor: pointer;}
   }
 
   // specials
@@ -29,8 +47,8 @@
   &.type--fieldsetStop{background: $primary; color:contrastFW(#fff,$primary);}
   &.type--hidden{background: rgba($primary,0.1); color:contrastFW(body(font-color),rgba($primary,0.1));}
 }
-.table-list__cell{ display: table-cell; padding: 0.5rem; max-width: 20vw; vertical-align: top;
-  .table-list &{max-width: none; min-width: 150px;}
+.table-list__cell{ display: table-cell; padding: 0.5em 0.75em; vertical-align: top; min-width: 150px; word-break: keep-all; overflow-wrap: break-word;
+  @include media-max(lg){max-width: 20vw;}
   &[data-name*="nb"],
   &[data-name*="Lead"]{text-align: center;}
   &[data-name="id"]{text-align: center; width: 50px; min-width: 0;}
@@ -49,7 +67,7 @@
   }
 }
 
-.table-list__action{display: inline-block; margin: 0.2rem; line-height: 1.2; min-width: 1.4rem; color: inherit;
+.table-list__action{display: inline-block; margin: 0.2em; line-height: 1.2; min-width: 1.4em; color: inherit;
   &:hover{color: contrastFW($primary,body(block-background));}
 }
 
