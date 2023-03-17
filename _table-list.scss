@@ -4,6 +4,7 @@
   &.scroll-x{ overflow-x: auto; -webkit-overflow-scrolling: touch;width: auto; padding-left: 3px; padding-right: 3px;margin-right: -3px; margin-left: -3px;}
 	.filters+&{margin-top: 1em;}
   %input{min-width: 150px;}
+  input[type=number]{min-width: 0;}
 
   &.mode--block{
     thead, .table-list__headline{display: none;}
