@@ -17,9 +17,10 @@
     .table-list__cell{max-width: none; width: 100%; padding: 0;
       &:empty{display: none;}
       &[data-name="actions"]{margin-top: auto; text-align: right;
-        i[class*=fa],svg{font-size: 1.5em;}
+        i[class*=fa],svg{font-size: 1.25em;}
       }
     }
+    .table-list__action{margin: 0.2em 0.35em;}
     .table-list__cell[data-label]:before{content: attr(data-label); display: block; font-size: 0.8em; opacity: 0.45;}
   }
 }
@@ -51,7 +52,9 @@
 .table-list__cell{ display: table-cell; padding: 0.5em 0.75em; vertical-align: top; min-width: 150px; word-break: keep-all; overflow-wrap: break-word;
   @include media-max(lg){max-width: 20vw;}
   &[data-name*="nb"],
-  &[data-name*="Lead"]{text-align: center;}
+  &[data-name*="Lead"]{text-align: center;
+    .mode--block &{text-align: left; }
+  }
   &[data-name="id"]{text-align: center; width: 50px; min-width: 0;}
   &[data-name="actions"]{text-align: center; width: 50px; min-width: 0; white-space: nowrap;
     &.toggled{
