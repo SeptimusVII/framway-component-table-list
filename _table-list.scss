@@ -13,6 +13,7 @@
       &:empty,
       &.filler{background: none; height: 0; border: 0; padding: 0; margin: 0; pointer-events: none;}
       @include media-max(xs){min-width: 250px;} 
+      &.separator{flex-basis: 100%;padding: 0;}
     }
     .table-list__cell{max-width: none; width: 100%; padding: 0;
       &:empty{display: none;}
