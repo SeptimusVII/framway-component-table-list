@@ -6,7 +6,7 @@
   %input{min-width: 150px;}
   input[type=number]{min-width: 0;}
 
-  &.mode--block{
+  &.mode--block{ overflow: visible;
     thead, .table-list__headline{display: none;}
     tbody, .table-list__container{display: flex; flex-wrap: wrap; gap: 1em; width: 100%;}
     .table-list__line{display: flex;flex-direction: column; flex-grow: 1; flex-shrink: 0; flex-basis: 30%; max-width: 100%; min-width: 300px; gap: 1em; padding: 1.35em 1.5em;
