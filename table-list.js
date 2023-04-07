@@ -3,20 +3,24 @@ module.exports = function(app){
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
     TableList.lastUpdate     = "2.0.5";
-    TableList.version        = "1.1.2";
+    TableList.version        = "1.2.0";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
 
     TableList.prototype.onCreate = function(){
         var table = this;
-        table.$container = table.$el.find('.table-list__container').length ? table.$el.find('.table-list__container') : false;
-        table.$headline  = table.$el.find('.table-list__headline').length  ? table.$el.find('.table-list__headline')  : false;
-        table.$lines     = table.$el.find('.table-list__line').length      ? table.$el.find('.table-list__line')      : false;
-        table.responsive = (table.responsive !== undefined) ? table.responsive : table.getData('responsive', false);
+        table.$container    = table.$el.find('.table-list__container').length ? table.$el.find('.table-list__container') : false;
+        table.$headline     = table.$el.find('.table-list__headline').length  ? table.$el.find('.table-list__headline')  : false;
+        table.$lines        = table.$el.find('.table-list__line').length      ? table.$el.find('.table-list__line')      : false;
+        table.responsive    = (table.responsive !== undefined)                ? table.responsive                         : table.getData('responsive', false);
+        table.minWidthBlock = (table.minWidthBlock !== undefined)             ? table.minWidthBlock                      : table.getData('minwidthblock', false);
 
-        if (table.responsive)
+        if (table.responsive){
             table.$lines.last().after('<tr class="table-list__line filler"></tr><tr class="table-list__line filler"></tr>');
+            if(table.minWidthBlock)
+                table.$lines.css('min-width',table.minWidthBlock)
+        }
 
         if (table.$headline && table.$headline.find('.table-list__cell[data-label]').length) {
             table.$headline.find('.table-list__cell[data-label]').each(function(){
