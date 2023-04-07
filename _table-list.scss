@@ -37,7 +37,7 @@
 }
 .table-list__line{@extend %paper;  display: table-row;
   &.filler{display: none;}
-  &:not([class*="bg-"]){background-color: body(block-background);}
+  &:not([class*="bg-"]){background-color: body(block-background);color: contrastFW(body(font-color),body(block-background));}
   &.loading{ pointer-events: none;
     &>*{opacity: 0.3;}
   }
