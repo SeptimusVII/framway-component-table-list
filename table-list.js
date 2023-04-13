@@ -2,7 +2,7 @@ module.exports = function(app){
     var TableList = Object.getPrototypeOf(app).TableList = new app.Component("table-list");
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
-    TableList.lastUpdate     = "2.0.5";
+    TableList.lastUpdate     = "2.1.0";
     TableList.version        = "1.2.0";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
@@ -15,6 +15,7 @@ module.exports = function(app){
         table.$lines        = table.$el.find('.table-list__line').length      ? table.$el.find('.table-list__line')      : false;
         table.responsive    = (table.responsive !== undefined)                ? table.responsive                         : table.getData('responsive', false);
         table.minWidthBlock = (table.minWidthBlock !== undefined)             ? table.minWidthBlock                      : table.getData('minwidthblock', false);
+        table.addTooltip    = (table.addTooltip !== undefined)                ? table.addTooltip                         : table.getData('addtooltip', true);
 
         if (table.responsive){
             table.$lines.last().after('<tr class="table-list__line filler"></tr><tr class="table-list__line filler"></tr>');
@@ -28,6 +29,12 @@ module.exports = function(app){
             })
         }
 
+        if (table.addTooltip) {
+            table.$lines.find('.table-list__action').each((i,el) => {
+                el.setAttribute('tooltip', el.getAttribute('title'))
+                el.setAttribute('title', '')
+            })
+        }
 
         return table;
     };

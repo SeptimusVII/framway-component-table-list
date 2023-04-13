@@ -71,7 +71,7 @@
   }
 }
 
-.table-list__action{display: inline-block; margin: 0.2em; line-height: 1.2; min-width: 1.4em; color: inherit;
+.table-list__action{display: inline-block; margin: 0.2em; line-height: 1.2; min-width: 1.4em; color: inherit; position: relative;
   &:hover{color: contrastFW($primary,body(block-background));}
 }
 
