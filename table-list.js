@@ -3,7 +3,7 @@ module.exports = function(app){
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
     TableList.lastUpdate     = "2.1.0";
-    TableList.version        = "1.2.0";
+    TableList.version        = "1.2.1";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
@@ -20,7 +20,7 @@ module.exports = function(app){
         if (table.responsive){
             table.$lines.last().after('<tr class="table-list__line filler"></tr><tr class="table-list__line filler"></tr>');
             if(table.minWidthBlock)
-                table.$lines.css('min-width',table.minWidthBlock)
+                table.$el.find('.table-list__line').css('min-width',table.minWidthBlock)
         }
 
         if (table.$headline && table.$headline.find('.table-list__cell[data-label]').length) {
