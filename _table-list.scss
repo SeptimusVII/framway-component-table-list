@@ -35,9 +35,8 @@
 .table-list__headline{transform: translateY(0.5em); display: table-row;
 	.table-list__cell{white-space: nowrap; max-width: none;}
 }
-.table-list__line{@extend %paper;  display: table-row;
+.table-list__line{@include paper(); display: table-row;
   &.filler{display: none;}
-  &:not([class*="bg-"]){background-color: body(block-background);color: contrastFW(body(font-color),body(block-background));}
   &.loading{ pointer-events: none;
     &>*{opacity: 0.3;}
   }
