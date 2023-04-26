@@ -2,8 +2,8 @@ module.exports = function(app){
     var TableList = Object.getPrototypeOf(app).TableList = new app.Component("table-list");
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
-    TableList.lastUpdate     = "2.1.0";
-    TableList.version        = "1.2.1";
+    TableList.lastUpdate     = "2.1.1";
+    TableList.version        = "1.2.2";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
@@ -29,16 +29,20 @@ module.exports = function(app){
             })
         }
 
-        if (table.addTooltip) {
-            table.$lines.find('.table-list__action').each((i,el) => {
-                el.setAttribute('tooltip', el.getAttribute('title'))
-                el.setAttribute('title', '')
-            })
-        }
+        if (table.addTooltip) 
+            table.convertTooltips();
 
         return table;
     };
 
+    TableList.prototype.convertTooltips = function(){
+        var table = this;
+        table.$el.find('.table-list__line .table-list__action').each((i,el) => {
+            el.setAttribute('tooltip', el.getAttribute('title'))
+            el.setAttribute('title', '');
+        });
+        app.adjustTooltips()
+    }
     TableList.prototype.onResize = function(){
         var table = this;
         if (table.responsive) {
