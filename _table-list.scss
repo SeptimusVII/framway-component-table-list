@@ -80,6 +80,8 @@
 
 .table-list__action{display: inline-block; margin: 0.2em; line-height: 1.2; min-width: 1.4em; color: inherit; position: relative;
   &:hover{color: contrastFW($primary,body(block-background));}
+  &.disabled,
+  &[disabled]{opacity: 0.4; pointer-events: none;}
 }
 
 .table-list__action--wrapper{  display: inline-flex !important; align-items: center; justify-content: center;
