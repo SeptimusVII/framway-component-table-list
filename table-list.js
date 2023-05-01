@@ -3,7 +3,7 @@ module.exports = function(app){
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
     TableList.lastUpdate     = "2.1.1";
-    TableList.version        = "1.2.3";
+    TableList.version        = "1.2.4";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
@@ -38,8 +38,10 @@ module.exports = function(app){
     TableList.prototype.convertTooltips = function(){
         var table = this;
         table.$el.find('.table-list__line .table-list__action').each((i,el) => {
-            el.setAttribute('tooltip', el.getAttribute('title'))
-            el.setAttribute('title', '');
+            if (el.getAttribute('title')) {
+                el.setAttribute('tooltip', el.getAttribute('title'))
+                el.setAttribute('title', '');
+            }
         });
         app.adjustTooltips()
     }
