@@ -2,7 +2,7 @@ module.exports = function(app){
     var TableList = Object.getPrototypeOf(app).TableList = new app.Component("table-list");
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
-    TableList.lastUpdate     = "2.1.1";
+    TableList.lastUpdate     = "2.4.0";
     TableList.version        = "1.2.4";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
@@ -10,12 +10,12 @@ module.exports = function(app){
 
     TableList.prototype.onCreate = function(){
         var table = this;
-        table.$container    = table.$el.find('.table-list__container').length ? table.$el.find('.table-list__container') : false;
-        table.$headline     = table.$el.find('.table-list__headline').length  ? table.$el.find('.table-list__headline')  : false;
-        table.$lines        = table.$el.find('.table-list__line').length      ? table.$el.find('.table-list__line')      : false;
-        table.responsive    = (table.responsive !== undefined)                ? table.responsive                         : table.getData('responsive', false);
-        table.minWidthBlock = (table.minWidthBlock !== undefined)             ? table.minWidthBlock                      : table.getData('minwidthblock', false);
-        table.addTooltip    = (table.addTooltip !== undefined)                ? table.addTooltip                         : table.getData('addtooltip', true);
+        table.$container    = table.$el.find('.table-list__container').length                          ? table.$el.find('.table-list__container')                          : false;
+        table.$headline     = table.$el.find('.table-list__headline').length                           ? table.$el.find('.table-list__headline')                           : false;
+        table.$lines        = table.$el.find('.table-list__line,tr:not(.table-list__headline)').length ? table.$el.find('.table-list__line,tr:not(.table-list__headline)') : false;
+        table.responsive    = (table.responsive !== undefined)                                         ? table.responsive                                                  : table.getData('responsive', false);
+        table.minWidthBlock = (table.minWidthBlock !== undefined)                                      ? table.minWidthBlock                                               : table.getData('minwidthblock', false);
+        table.addTooltip    = (table.addTooltip !== undefined)                                         ? table.addTooltip                                                  : table.getData('addtooltip', true);
 
         if (table.responsive){
             table.$lines.last().after('<tr class="table-list__line filler"></tr><tr class="table-list__line filler"></tr>');
@@ -23,21 +23,22 @@ module.exports = function(app){
                 table.$el.find('.table-list__line').css('min-width',table.minWidthBlock)
         }
 
-        if (table.$headline && table.$headline.find('.table-list__cell[data-label]').length) {
-            table.$headline.find('.table-list__cell[data-label]').each(function(){
-                table.$lines.find('.table-list__cell[data-name="'+this.getAttribute('data-name')+'"]').attr('data-label',this.getAttribute('data-label'))
+        if (table.$headline && table.$headline.find('[data-label]').length) {
+            table.$headline.find('[data-label]').each(function(){
+                table.$lines.find('.table-list__cell,td').filter('[data-name="'+this.getAttribute('data-name')+'"]').attr('data-label',this.getAttribute('data-label'))
             })
         }
 
         if (table.addTooltip) 
             table.convertTooltips();
 
+        // console.log(table);
         return table;
     };
 
     TableList.prototype.convertTooltips = function(){
         var table = this;
-        table.$el.find('.table-list__line .table-list__action').each((i,el) => {
+        table.$el.find('.table-list__action').each((i,el) => {
             if (el.getAttribute('title')) {
                 el.setAttribute('tooltip', el.getAttribute('title'))
                 el.setAttribute('title', '');
@@ -55,12 +56,12 @@ module.exports = function(app){
     }
 
     $(function(){
-        $('body').on('click','.table-list__line.separator',function(e){
-            var lines = $(this).nextUntil('.table-list__line.separator','.table-list__line');
+        $('body').on('click','.separator',function(e){
+            var lines = $(this).nextUntil('.separator','.table-list__line,tr');
             if ($(this).hasClass('inactive'))
-                $(this).removeClass('inactive').nextUntil('.table-list__line.separator','.table-list__line').show();
+                $(this).removeClass('inactive').nextUntil('.separator','.table-list__line,tr').show();
             else
-                $(this).addClass('inactive').nextUntil('.table-list__line.separator','.table-list__line').hide();
+                $(this).addClass('inactive').nextUntil('.separator','.table-list__line,tr').hide();
         });
     });
     return TableList;
