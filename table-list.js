@@ -2,8 +2,8 @@ module.exports = function(app){
     var TableList = Object.getPrototypeOf(app).TableList = new app.Component("table-list");
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
-    TableList.lastUpdate     = "2.4.0";
-    TableList.version        = "1.3.0";
+    TableList.lastUpdate     = "2.4.1";
+    TableList.version        = "1.4.0";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
@@ -16,6 +16,7 @@ module.exports = function(app){
         table.responsive    = (table.responsive !== undefined)                                         ? table.responsive                                                  : table.getData('responsive', false);
         table.minWidthBlock = (table.minWidthBlock !== undefined)                                      ? table.minWidthBlock                                               : table.getData('minwidthblock', false);
         table.addTooltip    = (table.addTooltip !== undefined)                                         ? table.addTooltip                                                  : table.getData('addtooltip', true);
+        table.isTable       = (table.$container.get(0).nodeName == 'TABLE');
 
         if (table.responsive){
             table.$lines.last().after('<tr class="table-list__line filler"></tr><tr class="table-list__line filler"></tr>');
@@ -25,7 +26,7 @@ module.exports = function(app){
 
         if (table.$headline && table.$headline.find('[data-label]').length) {
             table.$headline.find('[data-label]').each(function(){
-                table.$lines.find('.table-list__cell,td').filter('[data-name="'+this.getAttribute('data-name')+'"]').attr('data-label',this.getAttribute('data-label'))
+                table.$lines.find('.table-list__cell,td:not(.table-list__cell)').filter('[data-name="'+this.getAttribute('data-name')+'"]').attr('data-label',this.getAttribute('data-label'))
             })
         }
 
@@ -35,6 +36,32 @@ module.exports = function(app){
         // console.log(table);
         return table;
     };
+
+    TableList.prototype.addLine = function(data = false, attributes = false){
+        var table = this;
+        var line = document.createElement(table.isTable?'tr':'div');
+        var cellTag = table.isTable?'td':'div';
+        var columns = []
+        table.$headline.find('.table-list__cell,td:not(.table-list__cell),th:not(.table-list__cell)').each(function(){columns.push(this.getAttribute('data-name'));})
+        if (!data) {
+            for(var column of columns)
+                line.innerHTML += '<'+cellTag+' class="table-list__cell" data-name="'+column+'"></'+cellTag+'>';
+        } else {
+            if (Array.isArray(data)) {
+                for(var i in columns)
+                    line.innerHTML += '<'+cellTag+' class="table-list__cell" data-name="'+columns[i]+'">'+(data[i]?data[i]:'')+'</'+cellTag+'>';
+            } else if (typeof data === 'object' && data !== null){
+                for(var i in columns)
+                    line.innerHTML += '<'+cellTag+' class="table-list__cell" data-name="'+columns[i]+'">'+(data[columns[i]]?data[columns[i]]:'')+'</'+cellTag+'>';
+            }
+        }
+        if (attributes){
+            for(var attr in attributes)
+                line.setAttribute(attr,attributes[attr]);
+        }
+        table.$container.append(line);
+        return line;
+    }
 
     TableList.prototype.convertTooltips = function(){
         var table = this;
