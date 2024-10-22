@@ -22,6 +22,7 @@ module.exports = function(app){
             table.$lines.last().after('<tr class="table-list__line filler"></tr><tr class="table-list__line filler"></tr>');
             if(table.minWidthBlock)
                 table.$el.find('.table-list__line').css('min-width',table.minWidthBlock)
+            table.onResize();   
         }
 
         if (table.$headline && table.$headline.find('[data-label]').length) {
@@ -82,6 +83,7 @@ module.exports = function(app){
             if (table.$container.width() > table.$el.width())
                 table.$el.addClass('mode--block');
         }
+        table.log('resize', this);
     }
 
     $(function(){
