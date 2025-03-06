@@ -2,8 +2,8 @@ module.exports = function(app){
     var TableList = Object.getPrototypeOf(app).TableList = new app.Component("table-list");
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
-    TableList.lastUpdate     = "2.4.1";
-    TableList.version        = "1.4.1";
+    TableList.lastUpdate     = "2.5.2";
+    TableList.version        = "1.4.2";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
@@ -93,6 +93,10 @@ module.exports = function(app){
                 $(this).removeClass('inactive').nextUntil('.separator','.table-list__line,tr').show();
             else
                 $(this).addClass('inactive').nextUntil('.separator','.table-list__line,tr').hide();
+        });
+
+        $('body').on('click','.table-list__action--toggler',function(e){
+            $(this).closest('.table-list__cell,td').toggleClass('toggled');
         });
     });
     return TableList;

@@ -90,18 +90,19 @@
   }
 }
 
-.table-list__action{display: inline-block; margin: 0.2em; line-height: 1.2; min-width: 1.4em; color: inherit; position: relative;
+.table-list__action--toggler,
+.table-list__action{display: inline-block; margin: 0.2em; line-height: 1.2; min-width: 1.4em; color: inherit; position: relative; cursor: pointer;
   &:hover{color: contrastFW($primary,body(block-background));}
   &.disabled,
   &[disabled]{opacity: 0.4; pointer-events: none;}
 }
 
-.table-list__action--wrapper{  display: inline-flex !important; align-items: center; justify-content: center;
+.table-list__action--wrapper{  display: inline-flex !important; align-items: center; justify-content: center; border: 1px solid currentColor; border-radius: 100px;
   .table-list__action{display: none;}
-  .table-list__action--toggler{display: inline-block;
+  .table-list__action--toggler{ display: inline-flex; align-items: center; justify-content: center; aspect-ratio: 1;
     .toggler--close{display: none;}
   }
-  .table-list__cell.toggled & {padding: 0 0.55em; width: auto !important;
+  .table-list__cell.toggled & {padding: 0 0.35em; width: auto !important; 
     .table-list__action{display: inline-block;}
     .table-list__action--toggler{
       .toggler--open{display: none;}
