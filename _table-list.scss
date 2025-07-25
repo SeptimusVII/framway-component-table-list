@@ -105,6 +105,7 @@
   &:hover{color: contrastFW($primary,body(block-background));}
   &.disabled,
   &[disabled]{opacity: 0.4; pointer-events: none;}
+  &[tooltip]:not([tooltip=""]).tooltipOffset--left:before {left: auto; right: 0; transform: none;}
 }
 
 .table-list__action--wrapper{  display: inline-flex !important; align-items: center; justify-content: center; border: 1px solid currentColor; border-radius: 100px;
