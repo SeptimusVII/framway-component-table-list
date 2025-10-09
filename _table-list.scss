@@ -44,6 +44,14 @@
     &[data-name="actions"]{text-align: center;}
   }
 }
+
+@mixin lineColored(){
+  --line: var(--primary);
+  --line-color-l: -20;
+  --line-color-bg-l: 30;
+  background: Hsl(from var(--line) h s calc(l + var(--line-color-bg-l))); 
+  color     : Hsl(from var(--line) h s calc(l + var(--line-color-l)));
+}
 .table-list__line{@include paper(); display: table-row;
   &.filler{display: none;}
   &.loading{ pointer-events: none;
@@ -57,6 +65,25 @@
   &.type--fieldsetStart,
   &.type--fieldsetStop{background: $primary; color:contrastFW(#fff,$primary);}
   &.type--hidden{background: rgba($primary,0.1); color:contrastFW(body(font-color),rgba($primary,0.1));}
+
+  &.success{
+    @include lineColored();
+    --line: #{$success};
+  }
+  &.info{
+    @include lineColored();
+    --line: #{$info};
+  }
+  &.warning{
+    @include lineColored();
+    --line: #{$warning};
+  }
+  &.error{
+    @include lineColored();
+    --line: #{$error};
+    --line-color-l: -10;
+    --line-color-bg-l: 40;
+  }
 }
 .table-list__cell{ display: table-cell; padding: 0.5em 0.75em; vertical-align: top; min-width: 150px; word-break: keep-all; overflow-wrap: break-word;
   @include media-max(lg){max-width: 20vw;}
