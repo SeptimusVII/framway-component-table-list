@@ -3,7 +3,7 @@ module.exports = function(app){
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
     TableList.lastUpdate     = "2.6.0";
-    TableList.version        = "1.6.0";
+    TableList.version        = "1.6.1";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
@@ -68,6 +68,7 @@ module.exports = function(app){
         table.$container.append(line);
         if (table.addTooltip) 
             table.convertTooltips();
+        table.$lines = table.$el.find('.table-list__line,tr:not(.table-list__headline)');
         return line;
     }
 
