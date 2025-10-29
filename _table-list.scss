@@ -21,7 +21,7 @@
         i[class*=fa],svg{font-size: 1.25em;}
       }
     }
-    .table-list__action{margin: 0.2em 0.35em;}
+    .table-list__actions{display: flex; align-items: center; justify-content: flex-end;}
     .table-list__cell[data-label]:before{content: attr(data-label); display: block; font-size: 0.8em; opacity: 0.45;}
 
     table table{ 
