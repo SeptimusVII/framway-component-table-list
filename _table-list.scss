@@ -86,7 +86,7 @@
     --line-color-bg-l: 40;
   }
 }
-.table-list__cell{ display: table-cell; padding: 0.5em 0.75em; vertical-align: top; min-width: 150px; word-break: keep-all; overflow-wrap: break-word;
+.table-list__cell{ display: table-cell; padding: 0.5em 0.75em; vertical-align: top; min-width: 12ch; word-break: keep-all; overflow-wrap: break-word;
   @include media-max(lg){max-width: 20vw;}
   &[data-name*="nb"],{text-align: center;
     .mode--block &{text-align: left; }
