@@ -3,7 +3,7 @@ module.exports = function(app){
     // TableList.debug = true;
     TableList.createdAt      = "2.0.0";
     TableList.lastUpdate     = "2.7.0";
-    TableList.version        = "1.6.4";
+    TableList.version        = "1.6.5";
     // TableList.factoryExclude = true;
     // TableList.loadingMsg     = "This message will display in the console when component will be loaded.";
     // TableList.requires       = [];
@@ -27,7 +27,9 @@ module.exports = function(app){
 
         if (table.$headline && table.$headline.find('[data-label]').length && table.$lines.length) {
             table.$headline.find('[data-label]').each(function(){
-                table.$lines.find('.table-list__cell,td:not(.table-list__cell)').filter('[data-name="'+this.getAttribute('data-name')+'"]').attr('data-label',this.getAttribute('data-label'))
+                table.$lines.find('.table-list__cell,td:not(.table-list__cell)').filter('[data-name="'+this.getAttribute('data-name')+'"]')
+                .attr('data-label',this.getAttribute('data-label'))
+                .attr('title',this.getAttribute('data-label'))
             })
         }
 
