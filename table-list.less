@@ -3,10 +3,13 @@
   --tablelist-cell-p-x: 0.75em;
   --tablelist-cell-p-y: 0.5em;
   --tablelist-cell-minwidth: 12ch;
+  --tablelist-cell-maxwidth: none;
+  --tablelist-cell-valign: top;
   --tablelist-action-width: 40px;
 }
 .table-list{
-  display: block; width: 100%; 
+  display: block; width: 100%;
+  --theme: #default[block-background];
 }
 .table-list__container{
   width: 100%; 
@@ -16,8 +19,11 @@
   border-spacing: var(--tablelist-borderspacing);
 }
 .table-list__line{
-  .paper(); 
   display: table-row;
+  --shdw-elevation: 0.15;
+  .shdw();
+  &:not([class*=bg-]):not([class*=block-]){background: var(--theme); }
+  &.separator{cursor: pointer;}
 }
 .table-list__headline{
   transform: translateY(0.5em); 
@@ -30,7 +36,8 @@
   display: table-cell; 
   padding: var(--tablelist-cell-p-y) var(--tablelist-cell-p-x); 
   min-width: var(--tablelist-cell-minwidth); 
-  vertical-align: top; 
+  max-width: var(--tablelist-cell-maxwidth); 
+  vertical-align: var(--tablelist-cell-valign); 
   word-break: keep-all; 
   overflow-wrap: break-word;
 
@@ -45,7 +52,7 @@
   align-items: center;
   justify-content: end;
   gap: var(--actions-gap); 
-
+  a{text-decoration: none;}
   &:has(.table-list__action--wrapper.active),
   &:has(.table-list__action--toggler.active){
     .table-list__action{display: none;}
