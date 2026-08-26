@@ -131,8 +131,24 @@ module.exports = function(){
 //     });
 //     return TableList;
 // }
+let separatorClickHandler = document.addEventListener('click',(e)=>{
+    let separator = e.target.closest('.separator');
+    if (separator) {
+        if (separator.classList.contains('inactive')){
+            separator.classList.remove('inactive');
+            for(var line of utils.nextUntil(separator,'.table-list__line,tr','*','.separator')){
+                line.classList.remove('hidden');
+            }
+        } else {
+            separator.classList.add('inactive')
+            for(var line of utils.nextUntil(separator,'.table-list__line,tr','*','.separator')){
+                line.classList.add('hidden');
+            }
+        }
+    }
+})
 
-let togglerCliskHandler = document.addEventListener('click',(e)=>{
+let togglerClickHandler = document.addEventListener('click',(e)=>{
     let toggler = e.target.closest('.table-list__action--toggler');
     if (toggler) {
         toggler.closest('.table-list__action--wrapper').classList.toggle('active')
